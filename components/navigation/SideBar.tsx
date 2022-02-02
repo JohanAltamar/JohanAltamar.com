@@ -1,13 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import classNames from "classnames";
+// Components
+import Footer from "./Footer";
 // Icons
 import { FaHome, FaLaptopCode, FaRegAddressBook } from "react-icons/fa";
 import { useRouter } from "next/router";
 // i18n
 import t, { Languages } from "@/i18n";
 
-interface navbarProps {
+interface SideBarProps {
   className?: string;
 }
 
@@ -17,7 +19,7 @@ export enum Route {
   PROJECTS = "/projects",
 }
 
-const Navbar: React.FC<navbarProps> = ({ className }) => {
+const SideBar: React.FC<SideBarProps> = ({ className }) => {
   const router = useRouter();
   const lang = router.locale! as Languages;
 
@@ -28,36 +30,40 @@ const Navbar: React.FC<navbarProps> = ({ className }) => {
   return (
     <nav
       className={classNames(
-        "bg-lime-500 dark:bg-stone-900 flex lg:hidden",
+        "bg-lime-500 dark:bg-stone-900 hidden lg:flex lg:flex-col lg:justify-between",
         className
       )}
     >
-      <NavOption
-        title={t("home", lang)}
-        active={isActive(Route.HOME)}
-        href={Route.HOME}
-      >
-        <FaHome />
-      </NavOption>
-      <NavOption
-        title={t("about me", lang)}
-        active={isActive(Route.ABOUT)}
-        href={Route.ABOUT}
-      >
-        <FaRegAddressBook />
-      </NavOption>
-      <NavOption
-        title={t("projects", lang)}
-        active={isActive(Route.PROJECTS)}
-        href={Route.PROJECTS}
-      >
-        <FaLaptopCode />
-      </NavOption>
+      <header className="h-10 flex items-center justify-center">JADev</header>
+      <div>
+        <NavOption
+          title={t("home", lang)}
+          active={isActive(Route.HOME)}
+          href={Route.HOME}
+        >
+          <FaHome />
+        </NavOption>
+        <NavOption
+          title={t("about me", lang)}
+          active={isActive(Route.ABOUT)}
+          href={Route.ABOUT}
+        >
+          <FaRegAddressBook />
+        </NavOption>
+        <NavOption
+          title={t("projects", lang)}
+          active={isActive(Route.PROJECTS)}
+          href={Route.PROJECTS}
+        >
+          <FaLaptopCode />
+        </NavOption>
+      </div>
+      <Footer />
     </nav>
   );
 };
 
-export default Navbar;
+export default SideBar;
 
 interface NavOptionProps
   extends React.DetailedHTMLProps<
@@ -79,7 +85,7 @@ const NavOption: React.FC<NavOptionProps> = ({
   <Link href={href} passHref>
     <button
       className={classNames(
-        "flex-1 flex flex-col justify-center items-center border-t-4 text-stone-900 hover:bg-lime-600 dark:hover:bg-stone-800 transition-colors",
+        "w-full flex justify-start items-center py-2 px-6 border-l-4 text-stone-900 hover:bg-lime-600 dark:hover:bg-stone-800 transition-colors",
         {
           "border-red-600 text-red-700 hover:bg-lime-500 dark:hover:bg-stone-900 dark:border-lime-600 dark:text-lime-600":
             active,
@@ -90,7 +96,7 @@ const NavOption: React.FC<NavOptionProps> = ({
       name={title}
       {...otherProps}
     >
-      <span className="text-xl">{children}</span>
+      <span className="text-xl mr-2">{children}</span>
       <span className="text-sm uppercase mt-0.5">{title}</span>
     </button>
   </Link>

@@ -3,6 +3,7 @@ import React from "react";
 // Components
 import Navbar from "../navigation/Navbar";
 import OptionsBar from "../navigation/OptionsBar";
+import SideBar from "../navigation/SideBar";
 
 interface LayoutProps {
   contentClassName?: string;
@@ -19,12 +20,25 @@ const Layout: React.FC<LayoutProps> = ({
   return (
     <div
       className={classNames(
-        "h-screen grid grid-rows-[40px_1fr_56px]",
+        "main-grid--default main-grid--large",
         wrapperClassName
       )}
     >
-      <OptionsBar />
-      <main className={contentClassName}>{children}</main>
+      <OptionsBar className="lg:col-start-3 lg:col-span-10" />
+      <SideBar
+        className={classNames(
+          "col-start-1 col-end-3 row-span-full",
+          navbarClassName
+        )}
+      />
+      <main
+        className={classNames(
+          "col-span-full lg:col-start-5 lg:col-end-11 bg-red-500",
+          contentClassName
+        )}
+      >
+        {children}
+      </main>
       <Navbar className={navbarClassName} />
     </div>
   );
