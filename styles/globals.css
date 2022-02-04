@@ -9,4 +9,14 @@
   .main-grid--large {
     @apply lg:grid-rows-[40px_1fr] lg:grid-cols-12;
   }
+  .truncated-text {
+    /* background-color: red; */
+  }
+  .truncated-text:after {
+    content: "...";
+    position: absolute;
+    right: 1rem;
+    bottom: 0;
+    /* background-color: red; */
+  }
 }

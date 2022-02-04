@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({
       />
       <main
         className={classNames(
-          "col-span-full lg:col-start-5 lg:col-end-11 bg-red-500",
+          "col-span-full lg:col-start-4 lg:col-end-12 xl:col-start-5 xl:col-end-11",
           contentClassName
         )}
       >

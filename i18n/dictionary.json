@@ -4,7 +4,13 @@
   },
   "es": {
     "about me": "sobre mí",
+    "contact": "contacto",
     "home": "inicio",
-    "projects": "proyectos"
+    "projects": "proyectos",
+    "some projects I built": "algunos de mis proyectos",
+    "view Github": "ver Github",
+    "view LinkedIn": "ver LinkedIn",
+    "view online": "ver online",
+    "view repo": "ver repositorio"
   }
 }
