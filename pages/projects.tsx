@@ -36,7 +36,7 @@ export interface Results {
   results: Project[];
 }
 
-const Home: NextPage = () => {
+const ProjectsPage: NextPage = () => {
   const { locale, push } = useRouter();
   const { data: projectsResponse } = useQuery<AxiosResponse<Results>>(
     ["projects", locale],
@@ -133,4 +133,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default ProjectsPage;

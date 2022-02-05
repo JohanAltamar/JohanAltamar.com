@@ -1,6 +1,8 @@
-import classNames from "classnames";
 import React from "react";
+import classNames from "classnames";
+import { useRouter } from "next/router";
 // Components
+import ContactButton from "../ContactButton";
 import Navbar from "../navigation/Navbar";
 import OptionsBar from "../navigation/OptionsBar";
 import SideBar from "../navigation/SideBar";
@@ -17,6 +19,8 @@ const Layout: React.FC<LayoutProps> = ({
   navbarClassName,
   wrapperClassName,
 }) => {
+  const { pathname } = useRouter();
+
   return (
     <div
       className={classNames(
@@ -40,6 +44,14 @@ const Layout: React.FC<LayoutProps> = ({
         {children}
       </main>
       <Navbar className={navbarClassName} />
+      <ContactButton
+        className={classNames(
+          "lg:hidden fixed bottom-20 right-0 flex justify-center items-center h-10 aspect-square rounded-l-lg bg-red-600 hover:bg-red-500 dark:bg-lime-800 dark:hover:bg-lime-700 text-white hover:text-white dark:text-gray-300 dark:hover:text-white text-xl",
+          {
+            hidden: pathname === "/contact",
+          }
+        )}
+      />
     </div>
   );
 };

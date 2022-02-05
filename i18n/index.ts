@@ -11,7 +11,8 @@ type Dictionary = {
   [key in Languages]: Phrases;
 };
 
-const translate = (phrase: string, lang: Languages) => {
+const translate = (phrase?: string, lang?: Languages) => {
+  if (!phrase || !lang) return "";
   return ((dictionary as Dictionary)[lang][phrase] as string) || phrase;
 };
 

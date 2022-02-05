@@ -1,13 +1,26 @@
 {
   "en": {
-    "home": "home"
+    "home": "home",
+    "contact_message_pt1": "You can contact me by email at ",
+    "contact_message_pt2": " or leave your message here",
+    "form_message": "To send the message, you need to complete every field."
   },
   "es": {
     "about me": "sobre mí",
+    "close": "cerrar",
     "contact": "contacto",
+    "contact info": "información de contacto",
+    "contact_message_pt1": "Puedes enviarme un correo electrónico a ",
+    "contact_message_pt2": " o llenar el formulario a continuación.",
+    "email": "correo electrónico",
+    "form_message": "Para poder enviar el mensaje, es necesario que llenes todos los campos.",
+    "full name": "nombre completo",
     "home": "inicio",
+    "message": "mensaje",
     "projects": "proyectos",
     "some projects I built": "algunos de mis proyectos",
+    "send": "enviar",
+    "subject": "asunto",
     "view Github": "ver Github",
     "view LinkedIn": "ver LinkedIn",
     "view online": "ver online",

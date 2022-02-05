@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider } from "next-themes";
+import UIprovider from "@/context/UIstore/UIprovider";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
 
@@ -19,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider attribute="class">
-          <Component {...pageProps} />
+          <UIprovider>
+            <Component {...pageProps} />
+          </UIprovider>
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>
