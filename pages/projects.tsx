@@ -1,7 +1,5 @@
 import React from "react";
-import axios, { AxiosResponse } from "axios";
-import type { NextPage } from "next";
-import { useQuery } from "react-query";
+import type { GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Tooltip from "@reach/tooltip";
@@ -12,43 +10,21 @@ import { FaChrome, FaGithub } from "react-icons/fa";
 import Layout from "@/components/layouts/Layout";
 // Styles
 import "@reach/tooltip/styles.css";
+// Db Connection
+import dbConnect from "@/lib/dbConnext";
+// Models
+import { Project } from "@/models";
+// Types
+import { Project as ProjectType } from "@/interfaces";
 
-interface Translation {
-  language: string;
-  link: string;
-}
-export interface Project {
-  id: string;
-  title: string;
-  imageUrl: string;
-  description: string;
-  slug: string;
-  link: string;
-  repository: string;
-  language: "es" | "en";
-  type: string;
-  technologies: string[];
-  features: string[];
-  translations?: Translation[];
+interface ProjectsPageProps {
+  projects: ProjectType[];
 }
 
-export interface Results {
-  results: Project[];
-}
+const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
+  console.log(projects);
 
-const ProjectsPage: NextPage = () => {
   const { locale, push } = useRouter();
-  const { data: projectsResponse } = useQuery<AxiosResponse<Results>>(
-    ["projects", locale],
-    () => {
-      return axios.get(`/api/projects/${locale}`);
-    },
-    {
-      onError: () => {
-        console.log("Error fetching projects");
-      },
-    }
-  );
 
   const lang = locale as Languages;
 
@@ -69,8 +45,8 @@ const ProjectsPage: NextPage = () => {
         {t("some projects I built", lang)}
       </p>
       <section className="my-4 grid grid-cols-1 gap-8 sm:grid-cols-2">
-        {projectsResponse?.data.results.map((project) => (
-          <Link key={project.slug} href={project.slug} passHref>
+        {projects.map((project) => (
+          <Link key={project.slug} href={`/projects/${project.slug}`} passHref>
             <div
               onClick={handleProjectClick(project.slug)}
               className="p-6 shadow-xl dark:shadow-none shadow-black/30 hover:shadow-black/40 rounded-lg bg-white hover:bg-black/5 dark:bg-stone-800 dark:hover:bg-stone-700 hover:cursor-pointer transition-all duration-200"
@@ -81,7 +57,7 @@ const ProjectsPage: NextPage = () => {
                   <Tooltip label={t("view online", lang)}>
                     <button
                       className="text-xl p-1.5 hover:text-red-500 dark:hover:text-lime-500 transition-colors duration-200"
-                      onClick={handleButtonClick(project.link)}
+                      onClick={handleButtonClick(project.demo_url)}
                     >
                       <FaChrome />
                     </button>
@@ -89,7 +65,7 @@ const ProjectsPage: NextPage = () => {
                   <Tooltip label={t("view repo", lang)}>
                     <button
                       className="text-xl p-1.5 hover:text-red-500 dark:hover:text-lime-500 transition-colors duration-200"
-                      onClick={handleButtonClick(project.repository)}
+                      onClick={handleButtonClick(project.repo_url)}
                     >
                       <FaGithub />
                     </button>
@@ -134,3 +110,22 @@ const ProjectsPage: NextPage = () => {
 };
 
 export default ProjectsPage;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  try {
+    await dbConnect();
+    const projects: ProjectType[] = await Project.find({ language: locale });
+
+    return {
+      props: {
+        isConnected: true,
+        projects: JSON.parse(JSON.stringify(projects)),
+      },
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: { isConnected: false },
+    };
+  }
+};

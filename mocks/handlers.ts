@@ -1,16 +1,16 @@
-import { Project } from "@/pages/projects";
+import { Project } from "@/interfaces";
 import { rest } from "msw";
 
 const results: Project[] = [
   {
-    id: "1",
+    _id: "1",
     title: "Lord of the Rings",
-    imageUrl: "/book-cover.jpg",
+    img: "/book-cover.jpg",
     description:
       "The Lord of the Rings is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien.",
     slug: "the-lord-of-the-rings",
-    link: "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
-    repository: "https://github.com/JohanAltamar",
+    demo_url: "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
+    repo_url: "https://github.com/JohanAltamar",
     language: "en",
     type: "frontend",
     technologies: ["react", "nextJs", "prisma", "msw"],
@@ -23,14 +23,14 @@ const results: Project[] = [
     ],
   },
   {
-    id: "3",
+    _id: "3",
     title: "Lord of the Rings 2",
-    imageUrl: "/book-cover.jpg",
+    img: "/book-cover.jpg",
     description:
       "The Lord of the Rings is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien.",
     slug: "the-lord-of-the-rings-2",
-    link: "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
-    repository: "https://github.com/JohanAltamar",
+    demo_url: "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
+    repo_url: "https://github.com/JohanAltamar",
     language: "en",
     type: "frontend",
     technologies: ["react", "nextJs", "prisma", "msw"],
@@ -43,14 +43,14 @@ const results: Project[] = [
     ],
   },
   {
-    id: "4",
+    _id: "4",
     title: "Lord of the Rings 3",
-    imageUrl: "/book-cover.jpg",
+    img: "/book-cover.jpg",
     description:
       "The Lord of the Rings is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien.",
     slug: "the-lord-of-the-rings-3",
-    link: "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
-    repository: "https://github.com/JohanAltamar",
+    demo_url: "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
+    repo_url: "https://github.com/JohanAltamar",
     language: "en",
     type: "frontend",
     technologies: ["react", "nextJs", "prisma", "msw"],
@@ -63,14 +63,14 @@ const results: Project[] = [
     ],
   },
   {
-    id: "2",
+    _id: "2",
     title: "El Señor de los Anillos",
-    imageUrl: "/book-cover.jpg",
+    img: "/book-cover.jpg",
     description:
       "El Señoor de los Anillos is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien.",
     slug: "el-senor-de-los-anillos",
-    link: "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
-    repository: "https://github.com/JohanAltamar",
+    demo_url: "https://en.wikipedia.org/wiki/The_Lord_of_the_Rings",
+    repo_url: "https://github.com/JohanAltamar",
     language: "es",
     type: "frontend",
     technologies: ["react", "nextJs", "prisma", "msw"],

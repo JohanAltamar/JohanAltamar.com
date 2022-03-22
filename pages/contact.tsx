@@ -21,7 +21,7 @@ const ContactPage = () => {
 
   return showContactModal ? (
     <>
-      {showContactModal === "/projects" && <ProjectsPage />}
+      {showContactModal === "/projects" && <ProjectsPage projects={[]} />}
       {showContactModal === "/about" && <AboutPage />}
       {showContactModal === "/" && <HomePage />}
       <ContactModal />
