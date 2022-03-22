@@ -8,7 +8,10 @@ import Layout from "@/components/layouts/Layout";
 import devImg from "@/public/images/dev.svg";
 import devDarkImg from "@/public/images/dev_dark.svg";
 
-const HomePage: NextPage = () => {
+import dbConnect from "@/lib/dbConnext";
+
+const HomePage: NextPage = (props) => {
+  console.log(props);
   const { theme } = useTheme();
 
   return (
@@ -27,3 +30,20 @@ const HomePage: NextPage = () => {
 };
 
 export default HomePage;
+
+/**
+ * @param {NextApiRequest} context
+ */
+export async function getServerSideProps() {
+  try {
+    await dbConnect();
+    return {
+      props: { isConnected: true },
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: { isConnected: false },
+    };
+  }
+}
