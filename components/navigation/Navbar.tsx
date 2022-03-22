@@ -28,7 +28,7 @@ const Navbar: React.FC<navbarProps> = ({ className }) => {
   return (
     <nav
       className={classNames(
-        "bg-lime-500 dark:bg-stone-900 flex lg:hidden",
+        "sticky bottom-0 bg-lime-500 dark:bg-stone-900 flex lg:hidden",
         className
       )}
     >

@@ -9,7 +9,12 @@ interface OptionsBarProps {
 
 const OptionsBar: React.FC<OptionsBarProps> = ({ className }) => {
   return (
-    <div className={classNames("px-6 flex justify-between", className)}>
+    <div
+      className={classNames(
+        "sticky top-0 z-10 px-6 flex justify-between bg-lime-200 dark:bg-neutral-900",
+        className
+      )}
+    >
       <LanguageSelect />
       <ThemeChanger />
     </div>

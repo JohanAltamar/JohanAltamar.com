@@ -24,14 +24,14 @@ const Layout: React.FC<LayoutProps> = ({
   return (
     <div
       className={classNames(
-        "main-grid--default main-grid--large",
+        "main-grid--default main-grid--large max-h-screen overflow-auto",
         wrapperClassName
       )}
     >
       <OptionsBar className="lg:col-start-3 lg:col-span-10" />
       <SideBar
         className={classNames(
-          "col-start-1 col-end-3 row-span-full",
+          "sticky top-0 col-start-1 col-end-3 row-span-full max-h-screen",
           navbarClassName
         )}
       />

@@ -85,12 +85,10 @@ const NavOption: React.FC<NavOptionProps> = ({
   <Link href={href} passHref>
     <button
       className={classNames(
-        "w-full flex justify-start items-center py-2 px-6 border-l-4 text-stone-900 hover:bg-lime-600 dark:hover:bg-stone-800 transition-colors",
+        "w-full flex justify-start items-center py-2 px-6 border-l-4 text-stone-900 hover:bg-lime-600 dark:hover:bg-stone-800 transition-colors border-lime-500 hover:border-lime-600 dark:border-stone-900 dark:hover:border-stone-800 dark:text-white",
         {
-          "border-red-600 text-red-700 hover:bg-lime-500 dark:hover:bg-stone-900 dark:border-lime-600 dark:text-lime-600":
+          "!border-red-600 !text-red-700 hover:bg-lime-500 dark:hover:bg-stone-900 dark:!border-lime-600 dark:!text-lime-600":
             active,
-          "border-lime-500 hover:border-lime-600 dark:border-stone-900 dark:hover:border-stone-800 dark:text-white":
-            !active,
         }
       )}
       name={title}
