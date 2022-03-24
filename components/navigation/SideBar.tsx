@@ -24,7 +24,8 @@ const SideBar: React.FC<SideBarProps> = ({ className }) => {
   const lang = router.locale! as Languages;
 
   const isActive = (path: string) => {
-    return router.pathname === path;
+    const rootPath = `/${router.pathname.split("/")[1]}`;
+    return rootPath === path;
   };
 
   return (
