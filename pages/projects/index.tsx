@@ -22,16 +22,9 @@ interface ProjectsPageProps {
 }
 
 const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
-  console.log(projects);
-
-  const { locale, push } = useRouter();
+  const { locale } = useRouter();
 
   const lang = locale as Languages;
-
-  const handleProjectClick = (url: string) => (ev: React.MouseEvent) => {
-    ev.stopPropagation();
-    push(url);
-  };
 
   const handleButtonClick = (url: string) => (ev: React.MouseEvent) => {
     ev.stopPropagation();
@@ -47,10 +40,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
       <section className="my-4 grid grid-cols-1 gap-8 sm:grid-cols-2">
         {projects.map((project) => (
           <Link key={project.slug} href={`/projects/${project.slug}`} passHref>
-            <div
-              onClick={handleProjectClick(project.slug)}
-              className="p-6 shadow-xl dark:shadow-none shadow-black/30 hover:shadow-black/40 rounded-lg bg-white hover:bg-black/5 dark:bg-stone-800 dark:hover:bg-stone-700 hover:cursor-pointer transition-all duration-200"
-            >
+            <div className="p-6 shadow-xl dark:shadow-none shadow-black/30 hover:shadow-black/40 rounded-lg bg-white hover:bg-black/5 dark:bg-stone-800 dark:hover:bg-stone-700 hover:cursor-pointer transition-all duration-200">
               <header className="flex justify-between items-center">
                 <h6 className="text-2xl">{project.title}</h6>
                 <div className="flex">

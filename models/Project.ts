@@ -11,6 +11,11 @@ const ProjectSchema = new mongoose.Schema({
     required: false,
     trim: true,
   },
+  imgSrc: {
+    type: String,
+    required: false,
+    trim: true,
+  },
   description: {
     type: String,
     required: true,
@@ -56,6 +61,11 @@ const ProjectSchema = new mongoose.Schema({
       language: { enum: ["en", "es"] },
       link: { type: String, trim: true, required: true },
     },
+  },
+  content: {
+    type: String,
+    required: true,
+    trim: true,
   },
 });
 
