@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 // Components
@@ -11,6 +12,7 @@ interface LayoutProps {
   contentClassName?: string;
   wrapperClassName?: string;
   navbarClassName?: string;
+  title?: string;
 }
 
 const Layout: React.FC<LayoutProps> = ({
@@ -18,6 +20,7 @@ const Layout: React.FC<LayoutProps> = ({
   contentClassName,
   navbarClassName,
   wrapperClassName,
+  title = "",
 }) => {
   const { pathname } = useRouter();
 
@@ -28,6 +31,9 @@ const Layout: React.FC<LayoutProps> = ({
         wrapperClassName
       )}
     >
+      <Head>
+        <title>{title}</title>
+      </Head>
       <OptionsBar className="lg:col-start-3 lg:col-span-10" />
       <SideBar
         className={classNames(
