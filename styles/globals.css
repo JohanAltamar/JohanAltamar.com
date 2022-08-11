@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .blog-post-page blockquote {
+    @apply border-l-4 border-gray-300 pl-5 mb-5;
+  }
+  .blog-post-page p {
+    @apply mb-5 text-lg;
+  }
+  .blog-post-page a {
+    @apply underline text-blue-200;
+  }
+  .blog-post-page img {
+    @apply bg-white p-2 px-5;
+  }
+  .blog-post-page ul {
+    @apply pl-6 mb-5 list-disc;
+  }
+  .blog-post-page ol {
+    @apply pl-6 mb-5 list-decimal;
+  }
+  .blog-post-page h2 {
+    @apply text-2xl font-bold my-2.5;
+  }
+  .blog-post-page h3 {
+    @apply text-xl font-bold my-2.5;
+  }
+}
 @layer components {
   .main-grid--default {
     @apply h-screen grid grid-rows-[40px_1fr_56px];
