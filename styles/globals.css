@@ -10,10 +10,10 @@
     @apply border-l-4 border-gray-300 pl-5 mb-5;
   }
   .blog-post-page p {
-    @apply mb-5 text-lg;
+    @apply my-5 text-lg;
   }
   .blog-post-page a {
-    @apply underline text-blue-200;
+    @apply underline text-green-800 dark:text-blue-200;
   }
   .blog-post-page img {
     @apply bg-white p-2 px-5 mx-auto my-5;
@@ -25,10 +25,10 @@
     @apply pl-6 mb-5 list-decimal;
   }
   .blog-post-page h2 {
-    @apply text-2xl font-bold my-2.5;
+    @apply text-2xl font-bold my-5;
   }
   .blog-post-page h3 {
-    @apply text-xl font-bold my-2.5;
+    @apply text-xl font-bold my-5;
   }
 }
 @layer components {
