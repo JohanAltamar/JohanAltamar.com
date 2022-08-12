@@ -16,7 +16,6 @@ interface BlogPageProps {
 }
 
 const BlogPage: NextPage<BlogPageProps> = ({ posts }) => {
-  console.log(posts);
   return (
     <Layout contentClassName="p-10 lg:px-0">
       <h3 className="text-2xl capitalize">Blog</h3>

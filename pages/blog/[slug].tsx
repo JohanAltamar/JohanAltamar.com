@@ -14,8 +14,7 @@ interface PostPageProps {
   post: IPost;
 }
 
-const AboutPage: NextPage<PostPageProps> = ({ post }) => {
-  console.log(post);
+const BlogPostPage: NextPage<PostPageProps> = ({ post }) => {
   return (
     <Layout
       contentClassName="p-10 lg:px-0"
@@ -49,4 +48,4 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return post ? { props: { post }, revalidate: 1 } : { notFound: true };
 };
 
-export default AboutPage;
+export default BlogPostPage;

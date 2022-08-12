@@ -8,8 +8,7 @@ import Layout from "@/components/layouts/Layout";
 import devImg from "@/public/images/dev.svg";
 import devDarkImg from "@/public/images/dev_dark.svg";
 
-const HomePage: NextPage = (props) => {
-  console.log(props);
+const HomePage: NextPage = () => {
   const { theme } = useTheme();
 
   return (
