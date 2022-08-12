@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import classNames from "classnames";
 // Icons
-import { FaHome, FaLaptopCode, FaRegAddressBook } from "react-icons/fa";
+import { FaHome, FaLaptopCode, FaRegAddressBook, FaBook } from "react-icons/fa";
 import { useRouter } from "next/router";
 // i18n
 import t, { Languages } from "@/i18n";
@@ -15,6 +15,7 @@ export enum Route {
   HOME = "/",
   ABOUT = "/about",
   PROJECTS = "/projects",
+  BLOG = "/blog",
 }
 
 const Navbar: React.FC<navbarProps> = ({ className }) => {
@@ -53,6 +54,13 @@ const Navbar: React.FC<navbarProps> = ({ className }) => {
         href={Route.PROJECTS}
       >
         <FaLaptopCode />
+      </NavOption>
+      <NavOption
+        title={t("blog", lang)}
+        active={isActive(Route.BLOG)}
+        href={Route.BLOG}
+      >
+        <FaBook />
       </NavOption>
     </nav>
   );

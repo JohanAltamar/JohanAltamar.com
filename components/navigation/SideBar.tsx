@@ -4,7 +4,7 @@ import classNames from "classnames";
 // Components
 import Footer from "./Footer";
 // Icons
-import { FaHome, FaLaptopCode, FaRegAddressBook } from "react-icons/fa";
+import { FaHome, FaLaptopCode, FaRegAddressBook, FaBook } from "react-icons/fa";
 import { useRouter } from "next/router";
 // i18n
 import t, { Languages } from "@/i18n";
@@ -17,6 +17,7 @@ export enum Route {
   HOME = "/",
   ABOUT = "/about",
   PROJECTS = "/projects",
+  BLOG = "/blog",
 }
 
 const SideBar: React.FC<SideBarProps> = ({ className }) => {
@@ -57,6 +58,13 @@ const SideBar: React.FC<SideBarProps> = ({ className }) => {
           href={Route.PROJECTS}
         >
           <FaLaptopCode />
+        </NavOption>
+        <NavOption
+          title={t("blog", lang)}
+          active={isActive(Route.BLOG)}
+          href={Route.BLOG}
+        >
+          <FaBook />
         </NavOption>
       </div>
       <Footer />
