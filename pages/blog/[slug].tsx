@@ -29,7 +29,7 @@ const BlogPostPage: NextPage<PostPageProps> = ({ post }) => {
             year: "numeric",
           })}
         </span>
-        <img className="my-5" src={post?.coverImage} />
+        <img src={post?.coverImage} />
         <div dangerouslySetInnerHTML={{ __html: post?.bodyHtml || "" }}></div>
       </div>
     </Layout>

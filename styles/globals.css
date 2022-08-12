@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  .blog-post-page {
+    @apply lg:w-full w-full;
+  }
   .blog-post-page blockquote {
     @apply border-l-4 border-gray-300 pl-5 mb-5;
   }
@@ -13,7 +16,7 @@
     @apply underline text-blue-200;
   }
   .blog-post-page img {
-    @apply bg-white p-2 px-5;
+    @apply bg-white p-2 px-5 mx-auto my-5;
   }
   .blog-post-page ul {
     @apply pl-6 mb-5 list-disc;
