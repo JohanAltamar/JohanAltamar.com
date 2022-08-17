@@ -1,10 +1,8 @@
 import React from "react";
 import type { GetStaticProps, NextPage } from "next";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Tooltip from "@reach/tooltip";
-// i18n
-import t, { Languages } from "@/i18n";
+// Icons
 import { FaChrome, FaGithub } from "react-icons/fa";
 // Template
 import Layout from "@/components/layouts/Layout";
@@ -13,19 +11,22 @@ import "@reach/tooltip/styles.css";
 // Db Connection
 import dbConnect from "@/lib/dbConnext";
 // Models
-import { Project } from "@/models";
+import { Dictionary, Project } from "@/models";
 // Types
-import { Project as ProjectType } from "@/interfaces";
+import {
+  Project as ProjectType,
+  Dictionary as DictionaryType,
+} from "@/interfaces";
 
 interface ProjectsPageProps {
   projects: ProjectType[];
+  dictionary: DictionaryType["content"];
 }
 
-const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
-  const { locale } = useRouter();
-
-  const lang = locale as Languages;
-
+const ProjectsPage: NextPage<ProjectsPageProps> = ({
+  dictionary,
+  projects,
+}) => {
   const handleButtonClick = (url: string) => (ev: React.MouseEvent) => {
     ev.stopPropagation();
     window.open(url, "_blank");
@@ -33,9 +34,9 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
 
   return (
     <Layout contentClassName="p-10 lg:px-0">
-      <h3 className="text-2xl capitalize">{t("projects", lang)}</h3>
+      <h3 className="text-2xl capitalize">{dictionary.projects}</h3>
       <p className="text-gray-600 dark:text-gray-400 capitalize">
-        {t("some projects I built", lang)}
+        {dictionary["some projects I built"]}
       </p>
       <section className="my-4 grid grid-cols-1 gap-8 sm:grid-cols-2">
         {projects.map((project) => (
@@ -44,7 +45,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
               <header className="flex justify-between items-center">
                 <h6 className="text-2xl">{project.title}</h6>
                 <div className="flex">
-                  <Tooltip label={t("view online", lang)}>
+                  <Tooltip label={dictionary["view online"]}>
                     <button
                       className="text-xl p-1.5 hover:text-red-500 dark:hover:text-lime-500 transition-colors duration-200"
                       onClick={handleButtonClick(project.demo_url)}
@@ -52,7 +53,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
                       <FaChrome />
                     </button>
                   </Tooltip>
-                  <Tooltip label={t("view repo", lang)}>
+                  <Tooltip label={dictionary["view repo"]}>
                     <button
                       className="text-xl p-1.5 hover:text-red-500 dark:hover:text-lime-500 transition-colors duration-200"
                       onClick={handleButtonClick(project.repo_url)}
@@ -69,7 +70,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
               </div>
               <div className="my-2">
                 <p className="capitalize font-medium">
-                  {t("main features", lang)}
+                  {dictionary["main features"]}
                 </p>
                 <ul className="list-disc px-4">
                   {project.features.map((feature) => (
@@ -105,11 +106,19 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     await dbConnect();
     const projects: ProjectType[] = await Project.find({ language: locale });
+    const dictionary: DictionaryType | null = await Dictionary.findOne({
+      language: locale,
+    });
+
+    if (!dictionary) {
+      throw new Error("No dictionary found");
+    }
 
     return {
       props: {
         isConnected: true,
         projects: JSON.parse(JSON.stringify(projects)),
+        dictionary: dictionary.content,
       },
     };
   } catch (e) {

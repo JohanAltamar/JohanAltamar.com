@@ -6,20 +6,24 @@ import "highlight.js/styles/github-dark-dimmed.css";
 // Types
 import type { GetStaticProps, NextPage } from "next";
 import type { Post as IPost } from "@/api/types";
+import { Dictionary as DictionaryType } from "@/interfaces";
 
 // Layouts
 import Layout from "@/components/layouts/Layout";
 
 // Api
 import { getAllPosts, getPostBySlug } from "@/api/getPosts";
+import dbConnect from "@/lib/dbConnext";
+import { Dictionary } from "@/models";
 
 hljs.registerLanguage("language-js", javascript);
 
 interface PostPageProps {
   post: IPost;
+  dictionary: DictionaryType["content"];
 }
 
-const BlogPostPage: NextPage<PostPageProps> = ({ post }) => {
+const BlogPostPage: NextPage<PostPageProps> = ({ dictionary, post }) => {
   React.useEffect(() => {
     hljs.highlightAll();
   }, []);
@@ -40,6 +44,18 @@ const BlogPostPage: NextPage<PostPageProps> = ({ post }) => {
         </span>
         <img src={post?.coverImage} />
         <div dangerouslySetInnerHTML={{ __html: post?.bodyHtml || "" }}></div>
+        {post?.mirrors.length > 0 && (
+          <p>
+            {dictionary["blog_post_comments"]}:{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={post?.mirrors[0]?.postUrl}
+            >
+              {post?.mirrors[0]?.site}
+            </a>
+          </p>
+        )}
       </div>
     </Layout>
   );
@@ -52,9 +68,26 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const slug = context.params?.slug;
-  const post = await getPostBySlug(`${slug}`);
-  return post ? { props: { post }, revalidate: 1 } : { notFound: true };
+  try {
+    await dbConnect();
+    const slug = context.params?.slug;
+    const post = await getPostBySlug(`${slug}`);
+    const dictionary: DictionaryType | null = await Dictionary.findOne({
+      language: context.locale,
+    });
+
+    if (!dictionary) {
+      throw new Error("No dictionary found");
+    }
+    return post
+      ? { props: { post, dictionary: dictionary.content }, revalidate: 1 }
+      : { notFound: true };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: { isConnected: false },
+    };
+  }
 };
 
 export default BlogPostPage;
